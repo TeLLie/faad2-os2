@@ -172,6 +172,13 @@ target_compile_definitions(${LIB} PRIVATE
 )
 endforeach()
 
+if(OS2)
+set_target_properties(faad faad_drm faad_fixed faad_drm_fixed PROPERTIES
+ OS2_DEF_VENDOR "TeLLie OS2 forever"
+ OS2_DEF_PATCH "${VERSION_PATCH}"
+ OS2_DEF_VERSION "${VERSION}")
+endif()
+
 # Generate a pkg-config files
 
 function(generate_pkg_config_path outvar path)
@@ -257,6 +264,13 @@ if (MSVC)
   )
 else()
   set_target_properties(faad_cli PROPERTIES OUTPUT_NAME faad)
+endif()
+
+if(OS2)
+set_target_properties(faad_cli PROPERTIES
+ OS2_DEF_VENDOR "TeLLie OS2 forever"
+ OS2_DEF_PATCH "${VERSION_PATCH}"
+ OS2_DEF_VERSION "${VERSION}")
 endif()
 
 # Installation
