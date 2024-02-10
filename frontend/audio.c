@@ -86,6 +86,8 @@ audio_file *open_audio_file(char *infile, int samplerate, int channels,
     {
 #ifdef _WIN32
         _setmode(_fileno(stdout), O_BINARY);
+#elif defined __EMX__
+	setmode(fileno(stdout), O_BINARY);
 #endif
         aufile->sndfile = stdout;
         aufile->toStdio = 1;

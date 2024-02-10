@@ -491,6 +491,8 @@ static int decodeAACfile(char *aacfile, char *sndfile, char *adts_fn, int to_std
         b.infile = stdin;
 #ifdef _WIN32
         _setmode(_fileno(stdin), O_BINARY);
+#elif defined __EMX__
+	setmode(fileno(stdin), O_BINARY);
 #endif
 
     }
@@ -962,6 +964,8 @@ static int decodeMP4file(char *mp4file, char *sndfile, char *adts_fn, int to_std
                 } else {
 #ifdef _WIN32
                     _setmode(_fileno(stdout), O_BINARY);
+#elif defined __EMX__
+	setmode(fileno(stdout), O_BINARY);
 #endif
                     aufile = open_audio_file("-", frameInfo.samplerate, frameInfo.channels,
                         (int)outputFormat, fileType, aacChannelConfig2wavexChannelMask(&frameInfo));
@@ -1283,6 +1287,8 @@ static int faad_main(int argc, char *argv[])
         hMP4File  = stdin;
 #ifdef _WIN32
         _setmode(_fileno(stdin), O_BINARY);
+#elif defined __EMX__
+	setmode(fileno(stdin), O_BINARY);
 #endif
 
     } else {
